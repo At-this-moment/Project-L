@@ -1,0 +1,24 @@
+.magnifier {
+    position: fixed;
+    border-radius: 50%;
+    overflow: hidden;
+    pointer-events: none;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    z-index: 9999;
+    backdrop-filter: none;
+  }
+  
+  .magnified-content {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    transform-origin: top left;
+  }
+  
+  .page-snapshot {
+    width: 100%;
+    height: 100%;
+    background: inherit;
+  }
+  

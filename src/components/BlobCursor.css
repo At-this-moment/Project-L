@@ -1,0 +1,87 @@
+.blob-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  .blob-main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .blob {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    backdrop-filter: blur(8px) brightness(1.3) contrast(1.2);
+    background-color: rgba(255, 255, 255, 0.647);
+    mix-blend-mode: lighten;
+    border: 1px solid rgb(255, 255, 255);
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  /* 형태 전환용 */
+  .circle {
+    border-radius: 50%;
+  }
+  .square {
+    border-radius: 0%;
+  }
+  
+  /* 크기 + 그림자 */
+  .blob-0 {
+    width: 125px;
+    height: 125px;
+    opacity: 0.6;
+    box-shadow: 10px 10px 5px #ffffff00;
+  }
+  
+  /* .blob-1 {
+    width: 125px;
+    height: 125px;
+    opacity: 0.6;
+    box-shadow: 10px 10px 5px rgb(255, 255, 255);
+  }
+  
+  .blob-2 {
+    width: 75px;
+    height: 75px;
+    opacity: 0.6;
+    box-shadow: 10px 10px 5px rgb(255, 255, 255);
+  } */
+  
+  /* 안쪽 점 - 강조/숨김 선택 가능 */
+  /* .inner-dot {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.8);
+  } */
+  
+  /* .inner-dot-0 {
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    left: 20px;
+  }
+  
+  .inner-dot-1 {
+    width: 35px;
+    height: 35px;
+    top: 45px;
+    left: 45px;
+  }
+  
+  .inner-dot-2 {
+    width: 25px;
+    height: 25px;
+    top: 25px;
+    left: 25px;
+  }
+   */

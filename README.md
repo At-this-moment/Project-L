@@ -1,7 +1,6 @@
 # Project L
 
-<img width="6000" height="3375" alt="L" src="https://github.com/user-attachments/assets/bb08ecc0-d432-4775-bbc2-cc92558f84d9" /><br />
-
+<img width="6000" height="3375" alt="L" src="https://github.com/user-attachments/assets/6e3298c7-5753-4101-81df-77cda67aeb7f" /><br />
 
 
 > **텍스트 자체에 집중한 개발자 포트폴리오**<br />
@@ -11,15 +10,17 @@
 ---
 
 ## 개요
-<img width="6000" height="3375" alt="L (1)" src="https://github.com/user-attachments/assets/fc8bfac0-ac2c-41e9-b56b-dc9e0e87b6a3" />
-
+<img width="6000" height="3375" alt="L (1)" src="https://github.com/user-attachments/assets/7b61c1dc-7963-47ab-9f15-ec64da7dec55" />
 
 ---
+
+
+
 ## 스크린샷
 
 ### 데스크톱
 
-| ![다크 테마 + 단색 대비](https://github.com/user-attachments/assets/abfdcbd5-273f-4464-9628-09026ee480b8) | ![상단 내비게이션](https://github.com/user-attachments/assets/dca8e3ae-2950-44c7-89ce-693c5f9432ef) | ![다국어 지원](https://github.com/user-attachments/assets/182c25df-8201-487e-b7ba-0cf630b7877c) |
+| ![다크 테마 + 단색 대비](https://github.com/user-attachments/assets/71e31226-aa85-430b-a1ac-d82099475cae) | ![상단 내비게이션](https://github.com/user-attachments/assets/51b5e532-6fa9-4731-be8c-07f5f4433a25) | ![다국어 지원](https://github.com/user-attachments/assets/53f789ad-7818-432a-8990-c7eef16eb677) |
 |:---------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------:|
 | Mouse Hover React | Profile Card | Profile Card Gradient  |
 
@@ -27,7 +28,7 @@
 
 ### 모바일
 
-| ![반응형 웹](https://github.com/user-attachments/assets/36fc2345-5018-4f52-923b-7e463e4acf92) | ![ProfileCard 팝업](https://github.com/user-attachments/assets/530f7e6a-0b09-4106-9cf5-bc3a1d3a6203) | ![링크 강조/호버 효과](https://github.com/user-attachments/assets/53f812d0-9cdb-4127-ba53-c819006b8a20) |
+| ![반응형 웹](https://github.com/user-attachments/assets/8fb5d07b-ef3f-4300-b51e-1c094578c28b) | ![ProfileCard 팝업](https://github.com/user-attachments/assets/a384ba39-5191-4241-aead-ff2ee5d158bc) | ![링크 강조/호버 효과](https://github.com/user-attachments/assets/d6f940e8-361e-45e3-8b31-baa40a93bb1a) |
 |:------------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|
 | Responsive web design | Responsive web design | Mobile Profile Card |
 
@@ -67,7 +68,7 @@
 
 ## 로고 해석
 
-![L 로고](https://github.com/user-attachments/assets/227cc3d5-64cd-4021-9098-c74a073c506c)
+<img width="1453" height="636" alt="image" src="https://github.com/user-attachments/assets/71f754fd-de61-439e-b335-87f102055a60" />
 
 이니셜 **L / H / J**를 수직·수평·사선으로 표현한 기하학적 조형.
 

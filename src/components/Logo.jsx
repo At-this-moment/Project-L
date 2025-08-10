@@ -4,7 +4,7 @@ export default function Logo({
   height = 56,
   isMobile = false,
   srcDesktop = '/logo.png',       // public/logo.png
-  srcMobile = '/logo-mobile.png', // public/logo-mobile.png
+  srcMobile = '/logo_mobile.png', // public/logo_mobile.png
   alt = 'Site Logo',
 }) {
   const src = isMobile ? srcMobile : srcDesktop;

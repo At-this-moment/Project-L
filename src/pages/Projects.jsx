@@ -92,7 +92,7 @@ export default function Projects() {
     <section
       className="projects-section"
       style={{
-        marginLeft: 160, // PC에서 네비바 폭
+        marginLeft: window.innerWidth > 768 ? 160 : 0, // 모바일에서는 마진 제거
         minHeight: "100vh",
         position: "relative",
         zIndex: 1,

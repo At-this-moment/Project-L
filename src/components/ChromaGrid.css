@@ -14,8 +14,14 @@
 @media (max-width: 768px) {
   .chroma-grid {
     grid-template-columns: 1fr; /* 모바일 1열 */
-    gap: 18px;                  /* 20 → 18 */
-    padding: 72px 16px 72px;    /* 모바일도 여유 있게 */
+    gap: 16px;                  /* 간격 축소 */
+    padding: 72px 16px 72px;    /* 모바일 여백 */
+    max-width: none !important;
+    width: 100% !important;
+  }
+  
+  .chroma-card {
+    grid-template-columns: 120px 1fr; /* 모바일에서 포스터 폭 더 축소 */
   }
 }
 

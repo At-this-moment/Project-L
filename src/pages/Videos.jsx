@@ -148,7 +148,7 @@ export default function Videos() {
           /* ====== Grid: 중앙 정렬 + 고정 폭 컬럼 ====== */
           .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, 450px);
+            grid-template-columns: repeat(auto-fill, minmax(300px, 450px));
             gap: 20px 24px;
             justify-content: center;   /* 가로 중앙 정렬 */
             align-content: start;      
@@ -156,8 +156,11 @@ export default function Videos() {
             margin: 0 auto;
           }
 
-          @media (max-width: 420px) {
-            .video-grid { grid-template-columns: 1fr; }
+          @media (max-width: 768px) {
+            .video-grid { 
+              grid-template-columns: 1fr; 
+              gap: 16px;
+            }
           }
 
           .video-card {
@@ -169,7 +172,8 @@ export default function Videos() {
             transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
             will-change: transform, opacity;
             backface-visibility: hidden;
-            width: 450px;  /* 카드 폭 고정 */
+            width: 100%;  /* 반응형 너비 */
+            max-width: 450px;  /* 최대 너비 제한 */
           }
           .video-card:hover {
             transform: translateY(-6px);

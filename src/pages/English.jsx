@@ -99,23 +99,34 @@ function English({ isMobile }) {
         <div className="lang-content active">
           <section id="home">
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-              <h1
-                onClick={() => setShowProfile(prev => !prev)}
-                style={{
-                  fontSize: "6rem",
-                  fontWeight: 100,
-                  fontVariationSettings: "'wght' 800",
-                  fontFamily: "'Pretendard Variable', sans-serif",
-                  margin: "0 0 0.5rem",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "0.6rem",
-                  cursor: "pointer",
-                }}
-                title="View Profile"
-              >
-                Lee Hyunjae
-              </h1>
+            <h1
+              onClick={() => setShowProfile(prev => !prev)}
+              style={{
+                fontSize: "6rem",
+                fontWeight: 100,
+                fontVariationSettings: "'wght' 800",
+                fontFamily: "'Pretendard Variable', sans-serif",
+                margin: "0 0 0.5rem",
+                display: "flex",
+                alignItems: "center",
+                gap: "0.6rem",
+                cursor: "pointer",
+                transition: "color 0.3s ease, transform 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "#03ff95";
+                e.currentTarget.style.textDecoration = "underline";
+                e.currentTarget.style.transform = "scale(1.03)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "";
+                e.currentTarget.style.textDecoration = "none";
+                e.currentTarget.style.transform = "scale(1)";
+              }}
+              title="View Profile"
+            >
+              Lee Hyunjae
+            </h1>
 
               <p
                 style={{
@@ -127,7 +138,7 @@ function English({ isMobile }) {
                   animation: "blinkFade 1.5s ease-in-out infinite",
                 }}
               >
-                <span className="highlight">↑ Click the name to view profile.</span>
+                <span className="highlight">Click the name to view profile ↗</span>
               </p>
             </div>
 
@@ -155,16 +166,16 @@ function English({ isMobile }) {
           <section id="projects">
             <h2>◰ Projects</h2>
             <ul>
-              <li><a href="https://github.com/Eatventory" target="_blank"><span className="highlight">KlickLab</span></a> — Clickstream analytics platform</li>
-              <li><strong>Disaster Site Data Collection Robot</strong> — Tracked robot to locate people in distress</li>
+              <li><a href="https://github.com/Eatventory" target="_blank"><span className="highlight">KlickLab ↗</span></a> — Clickstream analytics platform</li>
+              <li><a href="https://github.com/At-this-moment/Rescue-Recon-Rover" target="_blank"><span className="highlight">Rescue Recon Rover ↗</span></a> — Disaster Site Data Collection Robot</li>
             </ul>
           </section>
 
           <section id="experience">
             <h2>◳ Experience</h2>
             <ul>
-              <li><a href="https://jungle.krafton.com/program/info#info" target="_blank"><span className="highlight">KRAFTON JUNGLE</span></a> — Software Engineering Bootcamp, 2025</li>
-              <li><a href="https://github.com/Computer-Hardware-Industry-Perspective" target="_blank"><span className="highlight">C.H.I.P</span></a> — Hardware teardown · Industry trend research</li>
+              <li><a href="https://jungle.krafton.com/program/info#info" target="_blank"><span className="highlight">KRAFTON JUNGLE ↗</span></a> — Software Engineering Bootcamp, 2025</li>
+              <li><a href="https://github.com/Computer-Hardware-Industry-Perspective" target="_blank"><span className="highlight">C.H.I.P ↗</span></a> — Hardware teardown · Industry trend research</li>
             </ul>
           </section>
 

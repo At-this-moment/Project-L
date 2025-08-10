@@ -1,21 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRef } from 'react';
-import { motion, AnimatePresence } from "framer-motion";
+// src/pages/Korean.jsx
+import { useState, useEffect, useRef } from 'react';
 import '../index.css';
-import Logo from '../components/Logo';
 import VariableProximity from '../components/VariableProximity';
-import ProfileCard from "../components/ProfileCard";
-import "../components/ProfileCard.css";
 import ProfilePopup from "../components/ProfilePopup";
-import GradientText from '../components/GradientText'; 
-
-
+import { Link } from 'react-router-dom';
 
 function Korean({ isMobile }) {
   const [langKo, setLangKo] = useState(true);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const containerRef = useRef(null);
+  const [showProfile, setShowProfile] = useState(false);
 
   useEffect(() => {
     const faders = document.querySelectorAll('.fade-in');
@@ -33,86 +26,14 @@ function Korean({ isMobile }) {
     return () => observer.disconnect();
   }, []);
 
-  const toggleLang = () => setLangKo(prev => !prev);
-  const toggleMobile = () => setMobileOpen(prev => !prev);
-  const navigate = useNavigate();
-  const [showProfile, setShowProfile] = useState(false);
-
   return (
     <>
-      {/* Desktop Navigation */}
-      <nav className="desktop-nav">
-        <a href="#home" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-        }}>
-        </a>
-        <a href="#home" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-        }}>Home</a>
-        <a href="#projects" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-        }}>Projects</a>
-        <a href="https://velog.io/@qnfrma1997/series" target="_blank" rel="noopener noreferrer">Velog</a>
-        <a href="https://github.com/At-this-moment" target="_blank" rel="noopener noreferrer">Github</a>
-        <a
-          href="#"
-          className="lang-toggle"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate('/en');
-          }}
-        >
-          English
-        </a>
-      </nav>
-
-      {/* Mobile Header & Hamburger */}
-      <div className="mobile-header">
-        <button className="hamburger" onClick={toggleMobile}>☰</button>
-        <div className="logo-mobile">
-          <Logo width={48} height={48} isMobile={isMobile} />
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
-      <nav id="mobile-nav" className={`mobile-nav ${mobileOpen ? 'show' : ''}`}>
-        <a href="#home" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
-          setMobileOpen(false);
-        }}>Home</a>
-        <a href="#projects" onClick={(e) => {
-          e.preventDefault();
-          document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-          setMobileOpen(false);
-        }}>Projects</a>
-        <a href="https://velog.io/@qnfrma1997/series" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Velog</a>
-        <a href="https://github.com/At-this-moment" target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)}>Github</a>
-        <a
-          href="#"
-          className="lang-toggle"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate('/en');
-            setMobileOpen(false);
-          }}
-        >
-          English
-        </a>
-      </nav>
-
-
-
+      {/* 전역 네비는 App.jsx에서 렌더링됨 */}
 
       <main>
         <div id="lang-ko" className={`lang-content ${langKo ? 'active' : ''}`}>
-          {/* 한국어 콘텐츠 전체 복사 및 붙여넣기 */}
-          
           <section id="home">
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
               <h1
                 onClick={() => setShowProfile(prev => !prev)}
                 style={{
@@ -125,6 +46,17 @@ function Korean({ isMobile }) {
                   alignItems: "center",
                   gap: "0.6rem",
                   cursor: "pointer",
+                  transition: "color 0.3s ease, transform 0.2s ease",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#03ff95";
+                  e.currentTarget.style.textDecoration = "underline";
+                  e.currentTarget.style.transform = "scale(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "";
+                  e.currentTarget.style.textDecoration = "none";
+                  e.currentTarget.style.transform = "scale(1)";
                 }}
                 title="View Profile"
               >
@@ -141,7 +73,9 @@ function Korean({ isMobile }) {
                   animation: "blinkFade 1.5s ease-in-out infinite",
                 }}
               >
-                <span className="highlight">↑ 이름을 클릭해보세요.</span>
+                <span>
+                  이름을 클릭해보세요 <span className="highlight">↗</span>
+                </span>
               </p>
             </div>
 
@@ -166,27 +100,42 @@ function Korean({ isMobile }) {
             </div>
           </section>
 
-
-
-
-
-
-
-          <section id="projects">
-            <h2>◰ 프로젝트</h2>
-            <ul>
-              <li><a href="https://github.com/Eatventory" target="_blank"><span className="highlight">KlickLab</span></a> — 클릭스트림 분석 플랫폼</li>
-              <li><strong>재난현장 정보수집 로봇</strong> — 요구조자의 위치를 파악하기 위한 궤도 로봇</li>
-            </ul>
-          </section>
-
           <section id="experience">
             <h2>◳ 경험</h2>
             <ul>
-              <li><a href="https://jungle.krafton.com/program/info#info" target="_blank"><span className="highlight">KRAFTON JUNGLE</span></a> — 소프트웨어 개발자 양성 부트캠프, 25.03 - 07</li>
-              <li><a href="https://github.com/Computer-Hardware-Industry-Perspective" target="_blank"><span className="highlight">C.H.I.P</span></a> — 컴퓨터 하드웨어 분해/조립 · 산업트렌드 리서치 동아리, 25.03 - 06</li>
+              <li>
+                <a href="https://jungle.krafton.com/program/info#info" target="_blank">
+                  KRAFTON JUNGLE <span className="highlight">↗ </span>
+                </a>
+                — 소프트웨어 개발자 양성 부트캠프, 25.03 - 07
+              </li>
+              <li>
+                <a href="https://github.com/Computer-Hardware-Industry-Perspective" target="_blank">
+                  C.H.I.P <span className="highlight">↗ </span>
+                </a>
+                — 컴퓨터 하드웨어 분해/조립 · 산업트렌드 리서치 동아리, 25.03 - 06
+              </li>
             </ul>
           </section>
+
+
+          <section id="projects">
+            <h2>
+              <Link to="/projects" style={{ textDecoration: "none", color: "#fff" }}>
+                ◰ 프로젝트 모아보기 <span className="highlight">↗</span>
+              </Link>
+            </h2>
+          </section>
+
+          <section id="videos">
+            <h2>
+              <Link to="/videos" style={{ textDecoration: "none", color: "#fff" }}>
+                ◱ 영상 모아보기 <span className="highlight">↗</span>
+              </Link>
+            </h2>
+          </section>
+
+
 
           <section id="skills">
             <h2>◲ 기술 스택</h2>
@@ -214,7 +163,7 @@ function Korean({ isMobile }) {
           </section>
 
           <section id="now">
-            <h2>◱ 지금 하고 있는 것들</h2>
+            <h2>◳ 지금 하고 있는 것들</h2>
             <ul>
               <li>React 기반 포트폴리오 사이트 개발 및 무중단 배포</li>
               <li>KlickLab 인프라 구조 정리 및 기술/최적화 과정 문서화</li>
@@ -230,10 +179,6 @@ function Korean({ isMobile }) {
               <li>창업 – 실제 문제를 해결하는 제품/기술 만들기</li>
             </ul>
           </section>
-
-          <footer>
-            <p>"서툴지언정 늘 행동이 먼저이기를" — <a href="mailto:qnfdlf1997@gmail.com">email me</a></p>
-          </footer>
         </div>
       </main>
     </>

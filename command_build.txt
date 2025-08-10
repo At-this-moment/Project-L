@@ -1,0 +1,6 @@
+rm -rf dist
+npm run build
+sudo rm -rf /var/www/dlguswo/*
+sudo cp -r dist/* /var/www/dlguswo/
+sudo chown -R www-data:www-data /var/www/dlguswo
+sudo systemctl restart nginx

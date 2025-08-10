@@ -1,0 +1,156 @@
+/* ===== 중앙 몰아주기: 최대 폭 + 여백(위 여백 크게) ===== */
+.chroma-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(360px, 520px)); /* 460~620 → 360~520 (카드 축소) */
+  gap: 24px 28px;                                         /* 32 40 → 24 28 */
+  justify-content: center;
+  max-width: 1100px;                                      /* 1280 → 1100 (그리드 폭 축소) */
+  margin: 0 auto;
+  padding: 96px 24px 96px;                                /* 32px top → 96px (위 여백 넉넉히) */
+}
+@media (max-width: 1024px) {
+  .chroma-grid { max-width: 960px; }                      /* 1040 → 960 */
+}
+@media (max-width: 768px) {
+  .chroma-grid {
+    grid-template-columns: 1fr; /* 모바일 1열 */
+    gap: 18px;                  /* 20 → 18 */
+    padding: 72px 16px 72px;    /* 모바일도 여유 있게 */
+  }
+}
+
+/* ===== 카드: 포스터 | 본문 ===== */
+.chroma-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px 1fr;   /* 260 → 200 (포스터 폭 축소) */
+  align-items: stretch;
+  border: 1px solid #202020;
+  border-radius: 0;
+  background: rgba(0,0,0,0.35);
+  transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+}
+.chroma-card:hover {
+  transform: translateY(-6px);
+  border-color: #03ff95;
+  box-shadow: 0 18px 28px rgba(0,0,0,.35);
+}
+
+.chroma-media { background: #0b3040; border-right: 1px solid #1e2b34; }
+.chroma-media a { display: block; }
+.chroma-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 27 / 40;
+  object-fit: contain;
+}
+
+
+/* ===== 본문 타이포 & 구분선 ===== */
+.chroma-body {
+  display: flex;              /* grid → flex 컬럼 */
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+
+  /* IBM Plex Mono 적용 + 얇은 굵기 */
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 900;
+}
+
+.chroma-body .name {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.2px;
+  color: #ffffff; /* 타이틀 색상 강조 */
+}
+
+.chroma-body .name a {
+  color: inherit; /* 부모(.name)의 색상 상속 */
+  text-decoration: none;
+}
+
+.chroma-body .name a:hover {
+  text-decoration: underline;
+}
+
+.chroma-body .role {
+  font-size: 0.90rem;
+  color: #cfcfcf;
+  margin: 0;
+}
+
+.chroma-body .date {
+  font-size: 0.88rem;
+  color: #aeb4bd;
+  margin-top: auto;  /* 본문 길이에 상관없이 아래 고정 */
+}
+
+/* 더 높은 우선순위를 위해 셀렉터 살짝 강화 */
+.chroma-card .chroma-body .desc {
+  font-family: var(--body-font, "Pretendard Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans KR", sans-serif);
+  font-size: 0.90rem;
+  color: #d8d8d8;
+  line-height: 1.42;
+  margin: 0;
+
+  /* 핵심: 부모의 wght 축 개입 제거 + 원하는 굵기 강제 */
+  font-variation-settings: normal !important;      /* 상속된 축 값 리셋 */
+  font-weight: 700;                                 /* 표준 속성 */
+  font-variation-settings: "wght" 700 !important;   /* 변수축 직접 고정 */
+}
+
+
+
+
+
+/* 얇은 가로선 */
+.divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.14), rgba(255,255,255,0.06));
+}
+
+
+@media (max-width: 768px) {
+  .chroma-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 72px 0 72px;  /* 좌우 0 */
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    justify-content: stretch;     /* center → stretch 효과 */
+    box-sizing: border-box;
+  }
+  /* 섹션/스테이지가 좌우 여백을 들고오지 않게 */
+  .projects-section {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .projects-stage {
+    max-width: none !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* 데스크톱 세로 네비가 겹쳐 밀지 않게 */
+  .desktop-nav { display: none !important; }
+}
+
+
+
+
+/* 오버레이 끔(풀컬러 유지) */
+.no-spotlight .chroma-card::before { content: none !important; }
+.chroma-overlay, .chroma-fade, .chroma-info { display: none !important; }
+
+/* 애니메이션 품질 보강 */
+.chroma-card { will-change: transform, opacity; backface-visibility: hidden; }
+.divider { transform-origin: left center; } /* 라인 드로잉 기준점 */

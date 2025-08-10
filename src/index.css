@@ -1,6 +1,7 @@
-/* --- Font --- */
+/* =========================================================
+   Font
+========================================================= */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css");
-
 
 @font-face {
   font-family: 'Pretendard Variable';
@@ -11,7 +12,19 @@
   font-family: 'Pretendard Variable', sans-serif !important;
 }
 
-/* --- Base Layout --- */
+/* =========================================================
+   Root Variables
+========================================================= */
+:root {
+  --nav-h: 80px;
+  --nav-pad-x: 3rem;
+  --accent: #03ff95;
+  --mobile-header-h: 4rem;
+}
+
+/* =========================================================
+   Base Layout
+========================================================= */
 body {
   background-color: #000;
   color: #fff;
@@ -26,11 +39,15 @@ body {
 main {
   max-width: 800px;
   margin: 0 auto;
-  padding: 3rem;
+  padding: calc(var(--nav-h) + 1.5rem) 3rem 3rem;
   line-height: 1;
+  position: relative;
+  z-index: 1; /* 빛/이펙트 아래 깔리지 않게 */
 }
 
-/* --- Typography --- */
+/* =========================================================
+   Typography
+========================================================= */
 h1 {
   color: #fff;
   font-weight: 200;
@@ -71,35 +88,70 @@ ul.posts span {
   color: #777;
 }
 
-/* --- Navigation --- */
+/* =========================================================
+   Navigation (Desktop) - Vertical
+========================================================= */
 .desktop-nav {
-  background-color: transparent;
-  padding: 2rem 3rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 200px; /* 너비 넉넉히 */
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;      /* 왼쪽 정렬 */
+  gap: 1.8rem;                  /* 로고~메뉴 간격 조금 확대 */
+  padding: 2rem 0 2rem 3rem;  /* 왼쪽 여백 통일 */
+  background: none;
+  border: none;
+}
+
+
+.desktop-nav .nav-logo {
   display: flex;
   align-items: center;
-  gap: 3rem;
-  font-size: 3rem;
-  line-height: 1;
+  cursor: pointer;
+  margin-bottom: 2rem; /* 로고와 메뉴 사이 간격 */
+}
+
+.desktop-nav .nav-logo img {
+  height: 72px; /* 로고 크게 */
+  width: auto;
+  object-fit: contain;
 }
 
 .desktop-nav a {
+  padding: 0 !important;        /* 전역 nav a 규칙 무효화 */
+  margin: 0 !important;         /* 불필요한 마진 제거 */
   font-variation-settings: 'wght' 500;
-  transition: font-variation-settings 0.2s ease;
+  transition: font-variation-settings 0.2s ease, color 0.2s ease;
+  color: #e6e6e6;
+  text-align: left;
+  line-height: 3;
 }
+
 
 .desktop-nav a:hover {
   font-variation-settings: 'wght' 800;
+  color: var(--accent);
 }
 
-nav img.logo {
-  height: 56px;
-  width: auto;
-  object-fit: contain;
-  display: inline-block;
-  vertical-align: middle;
+.desktop-nav a.active {
+  color: var(--accent);
 }
 
-/* 통일된 Navigation 스타일 */
+/* 본문은 왼쪽 네비바 너비만큼 여백 */
+main {
+  padding-left: calc(160px + 3rem); /* 네비 너비 + 내부 패딩 */
+  padding-top: 2rem;
+}
+
+
+/* =========================================================
+   Navigation (Common link style)
+========================================================= */
 nav a,
 .mobile-nav a {
   display: block;
@@ -114,14 +166,23 @@ nav a,
 
 nav a:hover,
 .mobile-nav a:hover {
-  color: #03ff95;
+  color: var(--accent);
 }
 
+/* =========================================================
+   Mobile Header & Navigation
+========================================================= */
 /* --- Mobile Header & Navigation --- */
 .mobile-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: calc(var(--mobile-header-h) + env(safe-area-inset-top, 0px)); /* ← 교체 */
+  padding-top: env(safe-area-inset-top, 0px);                           /* ← 추가(노치 대응) */
+  z-index: 1000;
   display: none;
-  position: relative;
-  height: 4rem;
+  background: rgba(0,0,0,.5);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
 .logo-mobile {
@@ -146,7 +207,13 @@ nav a:hover,
   z-index: 1001;
 }
 
+/* 기본은 숨김 (데스크톱 포함) */
 .mobile-nav {
+  position: fixed;
+  top: calc(var(--mobile-header-h) + env(safe-area-inset-top, 0px));    /* ← 교체: 4rem 하드코딩 → 변수 */
+  left: 0; right: 0;
+  z-index: 999;
+
   display: none;
   max-height: 0;
   overflow: hidden;
@@ -155,32 +222,38 @@ nav a:hover,
   gap: 1.5rem;
   background-color: #000;
   padding: 0 2rem;
-  position: absolute;
-  top: 4rem;
-  left: 0;
-  width: 100%;
-  z-index: 999;
   align-items: flex-start;
 }
 
+/* 메뉴 열릴 때만 보이기 */
 .mobile-nav.show {
   display: flex;
   max-height: 400px;
   padding: 1.5rem 2rem;
 }
 
-/* --- Language Toggle --- */
-.lang-content {
-  display: none;
+/* 네비바 아래 여유 공간 (공통) */
+main {
+  padding-top: calc(var(--nav-h) + 2rem); /* 네비 높이 + 추가 여유 */
 }
 
-.lang-content.active {
-  display: block;
+/* 모바일 네비 전용 (햄버거 메뉴 높이 반영) */
+@media (max-width: 768px) {
+  main {
+    /* 헤더 높이 + 약간의 여유(1rem) */
+    padding: calc(var(--mobile-header-h) + 1rem + env(safe-area-inset-top, 0px)) 1.5rem 2rem;
+  }
 }
 
-/* --- Highlight / Utility --- */
+
+/* =========================================================
+   Utility
+========================================================= */
+.lang-content { display: none; }
+.lang-content.active { display: block; }
+
 .highlight {
-  color: #03ff95;
+  color: var(--accent);
   font-variation-settings: 'wght' 700;
 }
 
@@ -189,16 +262,15 @@ a.highlight-link {
   color: inherit;
 }
 
-a.highlight-link:hover {
-  color: #03ff95;
-}
-
+a.highlight-link:hover,
 a.highlight-link .highlight {
-  color: #03ff95;
+  color: var(--accent);
   font-weight: 600;
 }
 
-/* --- Expandable Details --- */
+/* =========================================================
+   Expandable Details
+========================================================= */
 details {
   margin-top: 1rem;
   margin-bottom: 2rem;
@@ -212,9 +284,7 @@ summary {
   margin-bottom: 1rem;
 }
 
-details[open] summary {
-  margin-bottom: 1rem;
-}
+details[open] summary { margin-bottom: 1rem; }
 
 details h3 {
   color: #fff;
@@ -230,7 +300,9 @@ details p {
   line-height: 1.5;
 }
 
-/* --- Footer --- */
+/* =========================================================
+   Footer
+========================================================= */
 footer {
   margin-top: 6rem;
   padding-top: 3rem;
@@ -247,99 +319,9 @@ footer a {
   text-decoration: none;
 }
 
-/* --- Responsive --- */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none;
-  }
-
-  .mobile-header,
-  .hamburger,
-  .logo-mobile {
-    display: block;
-  }
-}
-
-@media (max-width: 600px) {
-  nav {
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-
-  main {
-    padding: 2rem 1.5rem;
-  }
-
-  h1 {
-    font-size: 4rem;
-    line-height: 1.2;
-    font-weight: 900;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    line-height: 1.4;
-  }
-
-  p, li {
-    font-size: 1rem;
-    line-height: 1.6;
-  }
-
-  ul.posts span {
-    width: auto;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  footer {
-    font-size: 1rem;
-    line-height: 1.5;
-    padding: 2rem 1rem;
-  }
-
-  .lang-toggle {
-    font-size: 1rem;
-    top: 1rem;
-    right: 1.2rem;
-  }
-}
-
-@media (max-width: 400px) {
-  nav {
-    font-size: 0.9rem;
-  }
-
-  h1 {
-    font-size: 3.5rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  p, li {
-    font-size: 0.95rem;
-  }
-
-  footer {
-    font-size: 0.95rem;
-  }
-
-  footer a {
-    display: block;
-    margin: 0.5rem 0;
-  }
-
-  .lang-toggle {
-    font-size: 0.95rem;
-  }
-}
-
-/* --- Fade-in Animation --- */
+/* =========================================================
+   Effects
+========================================================= */
 .fade-in {
   opacity: 0;
   transform: translateY(30px);
@@ -362,33 +344,16 @@ footer a {
 
 canvas#light-rays-canvas {
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0; /* 음수 대신 0 이상 */
+  top: 0; left: 0;
+  z-index: 0;
   width: 100vw;
   height: 100vh;
   pointer-events: none;
 }
 
-/* 주요 요소는 z-index 높이기 */
-main, nav, .mobile-header {
-  position: relative;
-  z-index: 1;
-}
-
-@media (min-width: 769px) {
-  .desktop-nav a {
-    font-size: 1.6rem;
-    font-weight: 600;
-  }
-}
-
 .ballpit-container {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  inset: 0;
   z-index: 0;
   pointer-events: none;
 }
@@ -403,15 +368,9 @@ main, nav, .mobile-header {
   pointer-events: none;
 }
 
-main, nav, .mobile-header {
-  position: relative;
-  z-index: 1;
-}
-
-.light-rays-container {
-  z-index: 3;
-}
-
+/* =========================================================
+   Fixed Logo
+========================================================= */
 .fixed-logo {
   position: fixed;
   top: 1.5rem;
@@ -419,4 +378,144 @@ main, nav, .mobile-header {
   width: 64px;
   height: 64px;
   z-index: 1000;
+}
+
+/* =========================================================
+   Responsive
+========================================================= */
+@media (max-width: 768px) {
+  .desktop-nav { display: none; }
+  .mobile-header,
+  .hamburger,
+  .logo-mobile { display: block; }
+  main { padding: calc(4rem + 1rem) 1.5rem 2rem; }
+}
+
+@media (max-width: 600px) {
+  nav {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  main { padding: calc(var(--mobile-header-h) + 1rem + env(safe-area-inset-top, 0px)) 1.5rem 2rem; }
+  h1 { font-size: 4rem; line-height: 1.2; font-weight: 900; }
+  h2 { font-size: 1.5rem; line-height: 1.4; }
+  p, li { font-size: 1rem; line-height: 1.6; }
+  ul.posts span { width: auto; display: block; margin-bottom: 0.5rem; }
+  footer { font-size: 1rem; line-height: 1.5; padding: 2rem 1rem; }
+  .lang-toggle { font-size: 1rem; top: 1rem; right: 1.2rem; }
+}
+
+@media (max-width: 400px) {
+  nav { font-size: 0.9rem; }
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 1.3rem; }
+  p, li { font-size: 0.95rem; }
+  footer { font-size: 0.95rem; }
+  footer a { display: block; margin: 0.5rem 0; }
+  .lang-toggle { font-size: 0.95rem; }
+}
+
+@media (min-width: 769px) {
+  .desktop-nav a {
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+}
+
+
+
+
+
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 기본: 모바일 2열 */
+  gap: 16px;
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)); /* PC: 4열 */
+    gap: 20px;
+  }
+}
+
+.project-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card {
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0a0a;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.card-cover {
+  aspect-ratio: 16/10;
+  overflow: hidden;
+  background: #111;
+}
+.card-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body {
+  padding: 14px 14px 16px;
+}
+.card-body h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.card-body p {
+  margin: 0;
+  color: #b5b5b5;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.tags li {
+  font-size: 0.75rem;
+  color: #9aa0a6;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 4px 8px;
+  border-radius: 999px;
+}
+
+/* Experience 섹션: 링크 색 고정 + ↗만 하이라이트 */
+#experience a {
+  color: #fff;            /* 기본 흰색 */
+  text-decoration: none;  /* 밑줄 제거(선택) */
+}
+
+#experience a:visited {
+  color: #fff;            /* 방문 후에도 흰색 */
+}
+
+#experience a:hover {
+  /* 필요하면 호버 시에도 흰색 유지 */
+  color: #fff;
+}
+
+/* ↗ 전용 하이라이트 */
+#experience a .highlight {
+  color: var(--accent);
+  margin-left: 0.2rem;    /* 글자와 ↗ 사이 살짝 띄우기(선택) */
 }

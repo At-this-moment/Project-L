@@ -1,0 +1,6 @@
+ssh -i dlguswo.com.pem ubuntu@15.164.51.49
+
+Host dlguswo
+  HostName 15.164.51.49
+  User ubuntu
+  IdentityFile C:/dlguswo.com/dlguswo.com.pem
